@@ -10,22 +10,36 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
     serializer_class = PontoTuristicoSerializers
 
     def get_queryset(self):
-        return PontoTuristico.objects.filter(aprovado=True)
+        id = self.request.query_params.get('id', None)
+        nome = self.request.query_params.get('nome', None)
+        descricao = self.request.query_params.get('descricao', None)
+
+        queryset = PontoTuristico.objects.all()
+
+        if id:
+            queryset = queryset.filter(pk=id)
+
+        if nome:
+            queryset = queryset.filter(nome__iexact=nome)
+
+        if descricao:
+            queryset = queryset.filter(descricao__iexact=descricao)
+
+        return queryset
 
     def list(self, request, *args, **kwargs):
-       return Response({'test': 123})
+        return super(PontoTuristicoViewSet, self).list(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        return Response({'ola': request.data['nome']})
+        return super(PontoTuristicoViewSet, self).create(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
-        pass
-
+        return super(PontoTuristicoViewSet, self).destroy(request, *args, **kwargs)
     def retrieve(self, request, *args, **kwargs):
-        pass
+        return super(PontoTuristicoViewSet, self).retrieve(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-        pass
+        return super(PontoTuristicoViewSet, self).update(request, *args, **kwargs)
 
     @action(methods=['GET'], detail=True)
     def denunciar(self, request, pk=None):
