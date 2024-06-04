@@ -11,6 +11,7 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
     serializer_class = PontoTuristicoSerializers
     filter_backends = [SearchFilter]
     search_fields = ['nome', 'descricao', 'endereco__linha1']
+    lookup_field = 'nome'
 
 
     def get_queryset(self):
@@ -45,13 +46,13 @@ class PontoTuristicoViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         return super(PontoTuristicoViewSet, self).update(request, *args, **kwargs)
 
-    @action(methods=['GET'], detail=True)
+    @action(methods=['get'], detail=True)
     def denunciar(self, request, pk=None):
         return Response({'msg': request.data['nome']})
 
     @action(methods=['get'], detail=False)
     def teste(self, request):
-        pass
+        return Response({'msg': 'testando...'})
 
 
 
