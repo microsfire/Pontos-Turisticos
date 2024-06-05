@@ -1,7 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import(
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+    DjangoModelPermissionsOrAnonReadOnly,
+    DjangoModelPermissions)
 from  rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 
