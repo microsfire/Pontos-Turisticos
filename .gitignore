@@ -1,5 +1,5 @@
 __pycache__/
-pontos-Turistcos_venv/
 *.sqlite3
 *.pyc
 *.idea/
+venv/
